@@ -33,15 +33,15 @@ ever did, I thought it worth saving:
 The line drivers only did the work to talk to the hardware.  All higher level
 input-editing and output preening was done by the common tty driver.  Each line
 driver had:
-   - an xx``open`` routie that would bring the line alive, and then call
+   - an **xx**``open`` routie that would bring the line alive, and then call
      ``ttyopen`` to initialize the session.
-   - an xx``rint`` received interrupt handler that called ``ttyinput`` with the received
+   - an **xx**``rint`` received interrupt handler that called ``ttyinput`` with the received
      character and a pointer to a unit information structure.
-   - an xx``xint`` transmission interrupt handler that called ``ttstart`` to start new
+   - an **xx**``xint`` transmission interrupt handler that called ``ttstart`` to start new
      output and (if appropriate) woke up any output that might have been blocked.
-   - an xx``read`` routine that called ``ttread``, passing it a unit information structure.
-   - an xx``write`` routine that called ``ttwrite``, passing it a unit information structure.
-   - an xx``sgtty`` routine that called ``ttystty`` to handle any mode changes.
+   - an **xx**``read`` routine that called ``ttread``, passing it a unit information structure.
+   - an **xx**``write`` routine that called ``ttwrite``, passing it a unit information structure.
+   - an **xx**``sgtty`` routine that called ``ttystty`` to handle any mode changes.
 
 The general purpose tty driver:
    - ``ttyinput`` handled each received character, handling all input editing
