@@ -33,26 +33,24 @@ ever did, I thought it worth saving:
 The line drivers only did the work to talk to the hardware.  All higher level
 input-editing and output preening was done by the common tty driver.  Each line
 driver had:
-   - an xxopen routie that would bring the line alive, and then call
-     ttyopen to initialize the session.
-   - an xxrint received interrupt handler that called ttyinput with the received
+   - an xx``open`` routie that would bring the line alive, and then call
+     ``ttyopen`` to initialize the session.
+   - an xx``rint`` received interrupt handler that called ``ttyinput`` with the received
      character and a pointer to a unit information structure.
-   - an xxxint transmission interrupt handler that called ttstart to start new
+   - an xx``xint`` transmission interrupt handler that called ``ttstart`` to start new
      output and (if appropriate) woke up any output that might have been blocked.
-   - an xxread routine that called ttread, passing it a unit information structure.
-   - an xxwrite routine that called ttwrite, passing it a unit information structure.
-   - an xxsgtty routine that called ttystty to handle any mode changes.
+   - an xx``read`` routine that called ``ttread``, passing it a unit information structure.
+   - an xx``write`` routine that called ``ttwrite``, passing it a unit information structure.
+   - an xx``sgtty`` routine that called ``ttystty`` to handle any mode changes.
 
 The general purpose tty driver:
-   - ttyinput handled each received character, handling all input editing
+   - ``ttyinput`` handled each received character, handling all input editing
      and all special (e.g. interrupt, kill, retype) characters.
-   - ttread handled the delivery of received data to the requesting user
-   - ttwrite handled writes from the user to the device
-   - ttyoutput passed each written character to the line driver, handling
+   - ``ttread`` handled the delivery of received data to the requesting user
+   - ``ttwrite`` handled writes from the user to the device
+   - ``ttyoutput`` passed each written character to the line driver, handling
      tabs, newlines, bells, and other special characters.
-   - ttstart and ttrstart initiated the flow of output that had not yet
+   - ``ttstart`` and ``ttrstart`` initiated the flow of output that had not yet
      started or had been blocked (e.g. by ^O).
-   - ttystty handled all length/speed/mode changes
-
-
+   - ``ttystty`` handled all length/speed/mode changes
 
